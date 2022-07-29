@@ -12,7 +12,26 @@ export default new Vuex.Store({
         // user: null,
         // 直接从本地获取初始值
         // user: JSON.parse(window.localStorage.getItem('TOUTIAO_USER'))
-        user: getItem('TOUTIAO_USER')
+        user: getItem('TOUTIAO_USER'),
+        // 这里是 自己写的静态资源 start
+        xiaojin: {
+            data: {
+                message: '获取用户信息成功',
+                data: {
+                    id: '20001210',
+                    name: 'xiaojin',
+                    photo: 'https://img01.yzcdn.cn/vant/cat.jpeg',
+                    is_media: 'true',
+                    intro: '他叫小金',
+                    certi: '自媒体认证说明',
+                    art_count: '22',
+                    follow_count: '35',
+                    fans_count: '782',
+                    like_count: '951'
+                }
+            }
+        }
+        // 这里是 自己写的静态资源 start
     },
     getters: {},
     mutations: {

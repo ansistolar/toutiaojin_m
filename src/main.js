@@ -20,12 +20,25 @@ import { Field } from 'vant';
 import { Button } from 'vant';
 import { Toast } from 'vant';
 import { CountDown } from 'vant'
+import { Tabbar, TabbarItem } from 'vant';
+import { Image as VanImage } from 'vant'
+import { Grid, GridItem } from 'vant';
+import { Cell, CellGroup } from 'vant';
+import { Dialog } from 'vant';
 Vue.use(NavBar);
 Vue.use(Form);
 Vue.use(Field);
 Vue.use(Button);
 Vue.use(Toast);
 Vue.use(CountDown);
+Vue.use(Tabbar);
+Vue.use(TabbarItem);
+Vue.use(VanImage);
+Vue.use(Grid);
+Vue.use(GridItem);
+Vue.use(Cell);
+Vue.use(CellGroup);
+Vue.use(Dialog);
 
 Vue.config.productionTip = false
 

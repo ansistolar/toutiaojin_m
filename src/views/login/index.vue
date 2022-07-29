@@ -1,7 +1,15 @@
 <template>
   <div class="login-container">
     <!-- 导航栏 start -->
-    <van-nav-bar class="page-nav-bar" title="登录" />
+    <van-nav-bar
+      class="page-nav-bar"
+      title="登录"
+      left-arrow
+    >
+      <template #left>
+        <i class="iconfont icon-left" style="color:#eee;" @click="$router.back()"></i>
+      </template>
+        </van-nav-bar>
     <!-- 导航栏 end -->
     <!-- 表单 start -->
     <van-form @submit="onSubmit" ref="loginForm">
@@ -126,8 +134,12 @@ export default {
         const res = await userLoginAPI(this.user);
         this.$toast.success("登陆成功");
         // 登陆成功后将用户 Token 存储到 Vuex 中
-         this.$store.commit('setUser',res.data.data)
+        this.$store.commit("setUser", res.data.data);
         // console.log("登陆成功", res);
+        // 登陆成功跳转页面
+        this.$router.push({
+          path:"/layout/home"
+        })
       } catch (err) {
         console.log(err);
         if (err.response.status === 400) {
@@ -157,17 +169,16 @@ export default {
         const res = await sendSmsAPI(this.user.mobile);
         // console.log(res.status);
         // console.log('验证码发送成功');
-        this.$toast('验证码发送成功')
-      } catch(err) {
+        this.$toast("验证码发送成功");
+      } catch (err) {
         // 发送失败，关闭验证码倒计时
         this.isCountDown = false;
-        if(err.response.status === 429) {
+        if (err.response.status === 429) {
           // console.log("用户操作频繁");
-          this.$toast('用户操作频繁')
-        }
-        else {
+          this.$toast("用户操作频繁");
+        } else {
           // console.log('手机号不正确');
-          this.$toast('手机号不正确');
+          this.$toast("手机号不正确");
         }
       }
     },
