@@ -17,7 +17,7 @@ request.interceptors.request.use(function(config) {
     // 通过拦截器优化Token设置
     const user = store.state.user;
     if (user && user.token) {
-        config.headers.Authorization = 'Bearer' + user.token;
+        config.headers.Authorization = 'Bearer ' + user.token;
     }
     console.log(config.headers.Authorization);
     // 务必 return config 否则请求永远停在这里了

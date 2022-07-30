@@ -13,3 +13,17 @@ export const sendSmsAPI = sendSms;
 // 获取用户基本信息
 import { getUserInfo } from "@/api/my"
 export const getUserInfoAPI = getUserInfo;
+
+// home 页面相关接口
+
+// 获取所有频道
+import { getAllChannel } from "@/api/home"
+export const getAllChannelAPI = getAllChannel;
+
+// 获取用户频道
+import { getUserChannel } from "@/api/home"
+export const getUserChannelAPI = getUserChannel;
+
+// 获取所有频道新闻推荐列表
+import { getAllArticleList } from "@/api/home"
+export const getAllArticleListAPI = getAllArticleList;

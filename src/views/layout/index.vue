@@ -5,7 +5,7 @@
     <!-- 子路由出口 -->
 
     <!-- tabBar 标签栏 -->
-    <van-tabbar class="tabbar-wrap" route>
+    <van-tabbar class="tabbar-wrap" route placeholder>
       <van-tabbar-item replace to="/layout/home">
         首页
         <template #icon>

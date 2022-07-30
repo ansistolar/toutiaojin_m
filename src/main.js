@@ -13,6 +13,9 @@ import 'amfe-flexible'
 // 引入 axios 请求相关文件
 import '@/api/index'
 
+// 引入 dayjs 的配置文件
+import "@/utils/dayjs.js"
+
 // 引入、注册 vant 相关组件
 import { NavBar } from 'vant';
 import { Form } from 'vant';
@@ -25,6 +28,11 @@ import { Image as VanImage } from 'vant'
 import { Grid, GridItem } from 'vant';
 import { Cell, CellGroup } from 'vant';
 import { Dialog } from 'vant';
+import { Icon } from 'vant';
+import { Tab, Tabs } from 'vant';
+import { List } from 'vant';
+import { PullRefresh } from 'vant';
+import { Popup } from 'vant';
 Vue.use(NavBar);
 Vue.use(Form);
 Vue.use(Field);
@@ -39,6 +47,12 @@ Vue.use(GridItem);
 Vue.use(Cell);
 Vue.use(CellGroup);
 Vue.use(Dialog);
+Vue.use(Icon);
+Vue.use(Tab);
+Vue.use(Tabs);
+Vue.use(List);
+Vue.use(PullRefresh);
+Vue.use(Popup);
 
 Vue.config.productionTip = false
 
