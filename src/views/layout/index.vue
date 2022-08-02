@@ -6,7 +6,7 @@
 
     <!-- tabBar 标签栏 -->
     <van-tabbar class="tabbar-wrap" route placeholder>
-      <van-tabbar-item replace to="/layout/home">
+      <van-tabbar-item to="/layout/home">
         首页
         <template #icon>
           <i class="iconfont icon-home"></i>

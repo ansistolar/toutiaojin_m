@@ -17,22 +17,63 @@ import '@/api/index'
 import "@/utils/dayjs.js"
 
 // 引入、注册 vant 相关组件
-import { NavBar } from 'vant';
-import { Form } from 'vant';
-import { Field } from 'vant';
-import { Button } from 'vant';
-import { Toast } from 'vant';
-import { CountDown } from 'vant'
-import { Tabbar, TabbarItem } from 'vant';
-import { Image as VanImage } from 'vant'
-import { Grid, GridItem } from 'vant';
-import { Cell, CellGroup } from 'vant';
-import { Dialog } from 'vant';
-import { Icon } from 'vant';
-import { Tab, Tabs } from 'vant';
-import { List } from 'vant';
-import { PullRefresh } from 'vant';
-import { Popup } from 'vant';
+import {
+    NavBar
+} from 'vant';
+import {
+    Form
+} from 'vant';
+import {
+    Field
+} from 'vant';
+import {
+    Button
+} from 'vant';
+import {
+    Toast
+} from 'vant';
+import {
+    CountDown
+} from 'vant'
+import {
+    Tabbar,
+    TabbarItem
+} from 'vant';
+import {
+    Image as VanImage
+} from 'vant'
+import {
+    Grid,
+    GridItem
+} from 'vant';
+import {
+    Cell,
+    CellGroup
+} from 'vant';
+import {
+    Dialog
+} from 'vant';
+import {
+    Icon
+} from 'vant';
+import {
+    Tab,
+    Tabs
+} from 'vant';
+import {
+    List
+} from 'vant';
+import {
+    PullRefresh
+} from 'vant';
+import {
+    Popup
+} from 'vant';
+import {
+    Search
+} from 'vant';
+import { Loading } from 'vant';
+import { Divider } from 'vant';
 Vue.use(NavBar);
 Vue.use(Form);
 Vue.use(Field);
@@ -53,6 +94,9 @@ Vue.use(Tabs);
 Vue.use(List);
 Vue.use(PullRefresh);
 Vue.use(Popup);
+Vue.use(Search);
+Vue.use(Loading);
+Vue.use(Divider);
 
 Vue.config.productionTip = false
 

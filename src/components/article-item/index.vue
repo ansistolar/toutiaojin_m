@@ -1,7 +1,21 @@
 <template>
   <div class="article-item">
     <van-cell-group>
-      <van-cell>
+      <!-- vant Cell 中的 to 属性和 vueRouter 中的 RouterLink 组件的 to 属性的用法是一样的 -->
+      <!-- <van-cell replace :to="'/article/'+articleItem.art_id"> -->
+      <!-- <van-cell replace :to="`/article/${articleItem.art_id}`"> -->
+      <van-cell
+        replace
+        :to="{
+        // 根据路由名进行跳转
+        name:'article',
+        // 传递路由动态参数
+        params:{
+          // 属性名：路由路径中设计的动态参数名称
+          articleId:articleItem.art_id,
+        }
+      }"
+      >
         <div slot="title" class="van-multi-ellipsis--l2 title">
           {{ articleItem.title }}
         </div>
@@ -50,11 +64,13 @@ export default {
   props: {
     articleItem: {
       type: Object,
-      require: true,
+      required: true,
     },
+
   },
+  methods: {},
   created() {
-    console.log(this.articleItem.cover);
+    // console.log(this.articleItem);
   },
 };
 </script>

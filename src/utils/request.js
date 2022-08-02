@@ -19,7 +19,7 @@ request.interceptors.request.use(function(config) {
     if (user && user.token) {
         config.headers.Authorization = 'Bearer ' + user.token;
     }
-    console.log(config.headers.Authorization);
+    // console.log(config.headers.Authorization);
     // 务必 return config 否则请求永远停在这里了
     return config;
 }, function(error) {

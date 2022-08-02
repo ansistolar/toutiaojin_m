@@ -28,7 +28,12 @@ export default new Vuex.Store({
                     follow_count: '35',
                     fans_count: '782',
                     like_count: '951'
-                }
+                },
+                allChannel: {
+
+                },
+                // jinChannel: {}
+                jinChannel: []
             }
         }
         // 这里是 自己写的静态资源 start
@@ -39,7 +44,16 @@ export default new Vuex.Store({
             state.user = data;
             // window.localStorage.setItem('TOUTIAO_USER', JSON.stringify(state.user))
             setItem('TOUTIAO_USER', state.user)
-        }
+        },
+        getUserChannel(state) {
+            for (var i = 0; i < 8; i++) {
+                state.xiaojin.data.jinChannel[i] = state.xiaojin.data.allChannel[2 * i]
+            }
+            console.log('jinChannel', state.xiaojin.data.jinChannel);
+        },
+        // addUserChannel(state, additem) {
+        //     state.xiaojin.data.jinChannel.push(additem);
+        // }
     },
     actions: {},
     modules: {}

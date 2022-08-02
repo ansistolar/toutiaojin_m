@@ -3,11 +3,16 @@ import VueRouter from 'vue-router'
 
 // 引入组件
 import login from "@/views/login/index.vue"
+
 import layout from "@/views/layout/"
 import home from "@/views/home"
 import qa from "@/views/qa"
 import videop from "@/views/videop"
 import my from "@/views/my"
+
+import search from "@/views/search"
+
+import article from "@/views/article"
 
 Vue.use(VueRouter)
 
@@ -24,7 +29,7 @@ const routes = [{
         name: "layout",
         component: layout,
         children: [{
-                path: '',
+                path: '/',
                 redirect: 'home'
             },
             {
@@ -45,6 +50,16 @@ const routes = [{
                 component: my
             }
         ]
+    }, {
+        path: "/search",
+        name: "search",
+        component: search,
+    },
+    {
+        path: "/article/:articleId", // ：指的是这里将要传入参数
+        name: "article",
+        component: article,
+        props: true, // 开启 Props 传参，说白了就是把路由参数映射到组件的 Props 数据中
     }
 ]
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="article-list">
+    <div class="article-list" >
       <!-- {{channelItem}} -->
       <van-pull-refresh
         v-model="refreshing"
@@ -43,7 +43,7 @@ export default {
     // 传入的数据
     channelItem: {
       type: Object,
-      require: true,
+      required: true,
     },
   },
   data() {
@@ -120,8 +120,11 @@ export default {
       // console.log(res.data);
       return res.data.data;
     },
+
+
   },
-  created() {},
+  created() {
+  },
 };
 </script>
 
