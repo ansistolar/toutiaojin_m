@@ -2,7 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 // 导入封装好的 本地存储操作模块
-import { getItem, setItem } from '@/utils/localStorage'
+import {
+    getItem,
+    setItem
+} from '@/utils/localStorage'
 
 Vue.use(Vuex)
 
@@ -33,7 +36,8 @@ export default new Vuex.Store({
 
                 },
                 // jinChannel: {}
-                jinChannel: []
+                jinChannel: [],
+                userCollectionId: [8121, 8078, 7994, 7956]
             }
         }
         // 这里是 自己写的静态资源 start
@@ -53,7 +57,14 @@ export default new Vuex.Store({
         },
         // addUserChannel(state, additem) {
         //     state.xiaojin.data.jinChannel.push(additem);
-        // }
+        // }，
+        addCollect(state, artId) {
+            state.xiaojin.data.userCollectionId.push(parseInt(artId))
+        },
+        delCollect(state, artId) {
+            const index = state.xiaojin.data.userCollectionId.findIndex(item => item == parseInt(artId))
+            state.xiaojin.data.userCollectionId.splice(index, 1);
+        },
     },
     actions: {},
     modules: {}

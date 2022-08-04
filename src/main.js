@@ -17,12 +17,8 @@ import '@/api/index'
 import "@/utils/dayjs.js"
 
 // 引入、注册 vant 相关组件
-import {
-    NavBar
-} from 'vant';
-import {
-    Form
-} from 'vant';
+import { NavBar } from 'vant';
+import { Form } from 'vant';
 import {
     Field
 } from 'vant';
@@ -56,22 +52,11 @@ import {
 import {
     Icon
 } from 'vant';
-import {
-    Tab,
-    Tabs
-} from 'vant';
-import {
-    List
-} from 'vant';
-import {
-    PullRefresh
-} from 'vant';
-import {
-    Popup
-} from 'vant';
-import {
-    Search
-} from 'vant';
+import { Tab, Tabs } from 'vant';
+import { List } from 'vant';
+import { PullRefresh } from 'vant';
+import { Popup } from 'vant';
+import { Search } from 'vant';
 import { Loading } from 'vant';
 import { Divider } from 'vant';
 Vue.use(NavBar);

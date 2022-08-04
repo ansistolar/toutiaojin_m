@@ -55,6 +55,18 @@ export const getSearchResultAPI = getSearchResult;
 // 文章详情页相关接口
 
 // 获取文章详情
-
 import { getArticleByID } from "./article";
 export const getArticleByIDAPI = getArticleByID;
+
+// 取消关注
+import { delFollow } from "@/api/article"
+export const delFollowAPI = delFollow;
+
+// 添加关注
+import { addFollow } from "@/api/article"
+export const addFollowAPI = addFollow;
+
+// 收藏 & 取消收藏文章
+import { addCollect, delCollect } from "@/api/article"
+export const addCollectAPI = addCollect;
+export const delCollectAPI = delCollect;
