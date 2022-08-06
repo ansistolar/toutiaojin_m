@@ -20,6 +20,11 @@ import {
 } from "@/api/my"
 export const getUserInfoAPI = getUserInfo;
 
+// 获取用户个人资料 & 编辑用户资料
+import { getUserProfile, editUserProfile } from "@/api/my"
+export const getUserProfileAPI = getUserProfile;
+export const editUserProfileAPI = editUserProfile;
+
 // home 页面相关接口
 
 // 获取所有频道
@@ -70,3 +75,16 @@ export const addFollowAPI = addFollow;
 import { addCollect, delCollect } from "@/api/article"
 export const addCollectAPI = addCollect;
 export const delCollectAPI = delCollect;
+
+// 获取文章评论
+import { getComment } from "@/api/article"
+export const getCommentAPI = getComment;
+
+// 对评论点赞 & 取消对评论点赞
+import { commentLike, delCommentLike } from "@/api/article"
+export const commentLikeAPI = commentLike;
+export const delCommentLikeAPI = delCommentLike;
+
+// 对文章或评论进行 评论
+import { addComment } from "@/api/article"
+export const addCommentAPI = addComment;

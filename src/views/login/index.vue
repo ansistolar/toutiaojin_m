@@ -20,6 +20,7 @@
         left-icon="music-o"
         placeholder="请输入手机号"
         type="number"
+        
         maxlength="11"
         :rules="userFormRules.mobile"
       >

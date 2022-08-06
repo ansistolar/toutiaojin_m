@@ -39,6 +39,7 @@
           <div slot="label" class="publish-date">
             {{ articleDetails.pubdate | relativeTime }}
           </div>
+
           <!-- 关注模块 start -->
           <!-- 					<van-button :loading="isFollowing" class="follow-btn" type="info" color="#3296fa" round size="small"
 						icon="plus" v-show="!articleDetails.is_followed" @click="onFollow(articleDetails)">
@@ -64,33 +65,61 @@
         ></div>
         <van-divider>正文结束</van-divider>
 
-		    <!-- 底部区域 -->
-    <div class="article-bottom">
-      <van-button class="comment-btn" type="default" round size="small"
-        >写评论</van-button
-      >
-      <van-icon name="comment-o" info="123" color="#777" />
-      <!-- 收藏按钮 start -->
-      <!-- <van-icon
-        v-show="!isCollect"
-        @click="starArticle(articleId)"
-        color="#777"
-        name="star-o"
-      />
-      <van-icon
-        v-show="isCollect"
-        @click="starArticle(articleId)"
-        name="star"
-        color="#ffe40f"
-      /> -->
-	  <!-- 将上面的封装为组件引入 -->
-	  <article-collect :articleId="articleId"></article-collect>
-      <!-- 收藏按钮 end -->
-      <van-icon color="#777" name="good-job-o" />
-      <van-icon name="share" color="#777777"></van-icon>
-    </div>
-    <!-- /底部区域 -->
-	
+        <!-- 评论列表 start -->
+        <comment-list
+          :source="articleId"
+          :list="commentList"
+          @onload-success="comCount = $event.total_count"
+        ></comment-list>
+        <!-- 评论列表 end -->
+
+        <!-- 底部区域 -->
+        <div class="article-bottom">
+          <van-button
+            class="comment-btn"
+            type="default"
+            round
+            size="small"
+            @click="isPostShow = true"
+          >
+            写评论
+          </van-button>
+
+          <!-- 写评论弹出层 start -->
+          <van-popup v-model="isPostShow" position="bottom">
+            <!-- 这是评论弹出层 -->
+            <comment-post
+              :target="articleId"
+              @post-success="onPostSuccess"
+            ></comment-post>
+          </van-popup>
+          <!-- 写评论弹出层 end -->
+
+          <!-- 文章评论 start -->
+          <van-icon name="chat-o" :badge="comCount" color="#777" />
+          <!-- 文章评论 end -->
+
+          <!-- 收藏按钮 start -->
+          <!-- <van-icon
+						v-show="!isCollect"
+						@click="starArticle(articleId)"
+						color="#777"
+						name="star-o"
+					  />
+					  <van-icon
+						v-show="isCollect"
+						@click="starArticle(articleId)"
+						name="star"
+						color="#ffe40f"
+					  /> -->
+          <!-- 将上面的封装为组件引入 -->
+          <article-collect :articleId="articleId"></article-collect>
+          <!-- 收藏按钮 end -->
+
+          <van-icon color="#777" badge="123" name="good-job-o" />
+          <van-icon name="share" color="#777777"></van-icon>
+        </div>
+        <!-- /底部区域 -->
       </div>
       <!-- /加载完成-文章详情 -->
 
@@ -112,13 +141,28 @@
       <!-- /加载失败：其它未知错误（例如网络原因或服务端异常） -->
     </div>
 
-
+    <!-- 回复评论弹出层 start -->
+    <van-popup v-model="isReplyShow" position="bottom" style="height: 100%">
+      <comment-reply
+        :currentComment="currentComment"
+        @click-close="isReplyShow = false"
+        @reply-click="onReplyClick"
+        v-if="isReplyShow"
+      />
+    </van-popup>
+    <!-- 回复评论弹出层 end -->
   </div>
 </template>
 
 <script>
 // 引入 vue 仓库
 import store from "@/store/index.js";
+
+// 引入评论列表组件
+import commentList from "./components/commentList.vue";
+
+// 引入评论弹出层组件
+import commentPost from "./components/commentPost.vue";
 
 // 引入接口
 import { getArticleByIDAPI, addFollowAPI, delFollowAPI } from "@/api/index";
@@ -132,7 +176,8 @@ import { ImagePreview } from "vant";
 // 导入封装的 关注&取消关注 按钮
 import followBtn from "@/components/followBtn/index.vue";
 // 导入封装的 收藏&取消收藏按钮
-import articleCollect from "@/components/articleCollect/index.vue"
+import articleCollect from "@/components/articleCollect/index.vue";
+import CommentReply from "./components/commentReply.vue";
 
 export default {
   name: "ArticleIndex",
@@ -152,12 +197,32 @@ export default {
       // 关注按钮加载页面
       // isFollowing: false,
       // 是否已收藏该文章
-    //   isCollect: false,	// 封装到组件中了
+      //   isCollect: false,	// 封装到组件中了
+      // 评论数量
+      comCount: 0,
+      // 评论弹出层
+      isPostShow: false,
+      // 子组件 commentList 的数据在这里定义
+      commentList: [], // 评论列表
+
+      // 回复评论弹窗的显示
+      isReplyShow: false,
+      currentComment: {}, // 当前回复评论的 具体数据
+    };
+  },
+  // 依赖注入：给所有的后代（包括孙）组件提供数据
+  // 注意：不要滥用，只有很多子组件都使用到这个数据的时候才建议使用依赖注入
+  provide() {
+    return {
+      articleId: this.articleId,
     };
   },
   components: {
     followBtn,
-	articleCollect
+    articleCollect,
+    commentList,
+    commentPost,
+    CommentReply,
   },
   methods: {
     // 获取文章详细信息业务
@@ -237,7 +302,8 @@ export default {
     // 		that.isFollowing = false;
     // 	}, 1000);
     // },
-	// 判断文章是否 已收藏 ！ 已封装到组件中
+
+    // 判断文章是否 已收藏 ！ 已封装到组件中
     // isCollected(articleId) {
     //   console.log("这是这篇文章的Id", articleId);
     //   console.log(
@@ -258,6 +324,7 @@ export default {
     //     this.isCollect = false;
     //   }
     // },
+
     // 点击收藏按钮	! 封装到组件中了
     // async starArticle(articleId) {
     //   try {
@@ -269,12 +336,29 @@ export default {
     //       // 收藏该文章
     //       await addCollectAPI(articleId);
     //     }
-	// 	// 最后修改收藏按钮状态
+    // 	// 最后修改收藏按钮状态
     //     this.isCollect = !this.isCollect;
     //   } catch (error) {
     //     console.log("收藏&取消收藏失败", error);
     //   }
     // },
+
+    // 评论发布成功 后续操作
+    onPostSuccess(data) {
+      // 关闭弹出层
+      this.isPostShow = false;
+      // 将发布内容显示到列表顶部
+      this.commentList.unshift(data.new_obj);
+    },
+
+    // 点击评论子项中的 回复 回复评论
+    onReplyClick(commentItemDetail) {
+      // 还顺便拿到了 要回复的评论的信息， 传给需要用到它的 回复评论组件
+      this.currentComment = commentItemDetail;
+      // console.log(commentItemDetail);
+      // 显示 回复评论弹出层
+      this.isReplyShow = true;
+    },
   },
   created() {
     // 根据文章 ID 获取文章详情

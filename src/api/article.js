@@ -52,3 +52,32 @@ export const delCollect = ArtId => {
         store.commit('delCollect', ArtId)
     }, 10000);
 }
+
+// 获取文章评论或评论
+export const getComment = params => request({
+    method: "GET",
+    url: "comments",
+    params
+})
+
+// 对评论点赞
+export const commentLike = target => request({
+    method: "POST",
+    url: "comment/likings",
+    data: {
+        target
+    }
+})
+
+// 取消对评论点赞
+export const delCommentLike = target => request({
+    method: "POST",
+    url: `comment/likings/${target}`,
+})
+
+// 对文章或评论进行 评论
+export const addComment = data => request({
+    method: "POST",
+    url: 'comments',
+    data
+})

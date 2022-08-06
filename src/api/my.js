@@ -35,3 +35,25 @@ export const getUserInfo = () => {
             // }
     }
 }
+
+// 获取用户个人资料
+export const getUserProfile = () => {
+    // return request({
+    //     method: "GET",
+    //     url: "user/profile"
+    // })
+    if (store.state.user.token) {
+        return store.state.userProfile
+    }
+}
+
+// 编辑用户个人资料
+export const editUserProfile = data => {
+    // return request({
+    //     method: "PATCH",
+    //     url: "user/profile",
+    //     data
+    // })
+    store.commit('editProfile', data)
+    return store.state.userProfile
+}

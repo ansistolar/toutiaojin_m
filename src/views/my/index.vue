@@ -24,6 +24,7 @@
           </div>
           <div class="right">
             <van-button round class="edButton" type="default"
+            to="/userProfile"
               >编辑资料</van-button
             >
           </div>

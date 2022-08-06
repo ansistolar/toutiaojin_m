@@ -14,6 +14,8 @@ import search from "@/views/search"
 
 import article from "@/views/article"
 
+import userProfile from "@/views/user-profile"
+
 Vue.use(VueRouter)
 
 const routes = [{
@@ -60,6 +62,12 @@ const routes = [{
         name: "article",
         component: article,
         props: true, // 开启 Props 传参，说白了就是把路由参数映射到组件的 Props 数据中
+    },
+    {
+        path: "/userProfile",
+        name: "userProfile",
+        component: userProfile,
+        props: true, // 组件中 Props 可以接收路由参数
     }
 ]
 

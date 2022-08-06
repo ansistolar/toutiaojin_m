@@ -39,6 +39,17 @@ export default new Vuex.Store({
                 jinChannel: [],
                 userCollectionId: [8121, 8078, 7994, 7956]
             }
+        },
+        userProfile: {
+            message: "OK",
+            data: {
+                id: 1,
+                name: "程序员",
+                photo: "https://img01.yzcdn.cn/vant/cat.jpeg",
+                mobile: "15616250607",
+                gender: 1,
+                birthday: "2001-12-12"
+            }
         }
         // 这里是 自己写的静态资源 start
     },
@@ -65,6 +76,10 @@ export default new Vuex.Store({
             const index = state.xiaojin.data.userCollectionId.findIndex(item => item == parseInt(artId))
             state.xiaojin.data.userCollectionId.splice(index, 1);
         },
+        editProfile(state, data) {
+            const editKey = Object.getOwnPropertyNames(data)[0];
+            state.userProfile.editKey = data.editKey
+        }
     },
     actions: {},
     modules: {}
